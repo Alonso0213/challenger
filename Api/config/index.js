@@ -11,6 +11,4 @@ const connection = createPool({
     connectionLimit: 30
 
 })
-modulue.exports ={
-    connection
-}
+modulue.exports = connection
