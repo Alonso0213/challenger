@@ -1,15 +1,14 @@
 //mmm
 const express = require("express");
 const bodyParser = require("body-parser");
+const{verifyAToken}=require('../middleware/authentication')
 const routes = express.Router();
 
 //import all models objects
-const { users } = require("../model");
-const { books } = require("../model");
+const { users,orders,books,bookAuthor } = require("../model");
 
-// routes.get('^/$|/challenger',(req,res)=>{
-//     res.sendFile(patn.resolve(__dirname,'../static'))
-// })
+
+
 
 //=====user's router======
 routes.get("/users", (req, res) => {
@@ -55,7 +54,27 @@ routes.get("/books", bodyParser.json(), (req, res) => {
   routes.delete("/book/:id", (req, res) => {
     books.deleteBook(req, res);
   });
-  
+
+
+  //====bookauthor routes=====
+  routes.get("/bookauthors", bodyParser.json(), (req, res) => {
+    bookAuthor.fetch(req, res);
+  });
+  routes.get("/bookauthor/:id", (req, res) => {
+    bookAuthor.fetchAuhtor(req, res);
+  });
+  routes.post("/registerAuthor", bodyParser.json(), (req, res) => {
+    bookAuthor.registerAuthor(req, res);
+  });
+  routes.put("/Author/:id", bodyParser.json(), (req, res) => {
+    bookAuthor.updateBAuthor(req, res);
+  });
+  routes.patch("/bookauthor/:id", bodyParser.json(), (req, res) => {
+    bookAuthor.updateAuthor(req, res);
+  });
+  routes.delete("/bookauthor/:id", (req, res) => {
+    bookAuthor.deleteAuthor(req, res);
+  });
 module.exports = {
   express,
   routes,
