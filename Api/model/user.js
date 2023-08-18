@@ -79,12 +79,9 @@ class users{
         db.query(query,[data],(err)=>{
             if (err) throw err
             let token=createToken(user)
-            res.cookie('LegitUser',token,{
-                maxAge:3600000,
-                httpOnly: true
-            })
             res.json({
                 status:res.statusCode,
+                token,
                 msg:"You have been registered😁👍"
             })
         })
@@ -118,15 +115,9 @@ class users{
                             emailAdd,
                             userPass
                         })
-                        // Save a token
-                        res.cookie("LegitUser",
-                        token, {
-                            maxAge: 3600000,
-                            httpOnly: true
-                        })
                         if(cResult) {
                             res.json({
-                                msg: "Logged in",
+                                msg: "Logged in👍",
                                 token,
                                 result: result[0]
                             })
